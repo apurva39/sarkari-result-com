@@ -165,3 +165,110 @@
     }
   }
 }
+
+
+
+
+/* @property --a {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.neon-new-badge {
+  position: relative;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #fff;
+  background: #0a0a12;
+  border-radius: 4px;
+  text-transform: uppercase;
+  z-index: 0;
+} */
+
+/* Neon animated border */
+/* .neon-new-badge::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: repeating-conic-gradient(
+    from var(--a),
+    #ff4545 0%,
+    #ff4545 10%,
+    #ff0095 20%,
+    #006aff 30%,
+    #00ff99 40%,
+    #ff4545 50%
+  );
+  filter: blur(4px);
+  opacity: 0.75;
+  z-index: -1;
+  animation: spinGlow 4s linear infinite;
+} */
+
+/* Inner mask to keep glow outside */
+/* .neon-new-badge::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #679bbd;
+  border-radius: 3px;
+  z-index: -1;
+}
+
+@keyframes spinGlow {
+  to {
+    --a: 1turn;
+  }
+} */
+
+
+.corner-badge {
+  position: relative;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #b20707;
+  background: #a3a0a0;
+  border-radius: 3px;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+/* Top-left horizontal line */
+.corner-badge::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #a3a0a0;
+  animation: lineLeft 1.2s linear infinite;
+}
+
+/* Bottom-right horizontal line */
+.corner-badge::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0%;
+  height: 2px;
+  background: #a3a0a0;
+  animation: lineRight 1.2s linear infinite;
+}
+
+@keyframes lineLeft {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes lineRight {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
