@@ -169,62 +169,6 @@
 
 
 
-/* @property --a {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.neon-new-badge {
-  position: relative;
-  padding: 2px 8px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  color: #fff;
-  background: #0a0a12;
-  border-radius: 4px;
-  text-transform: uppercase;
-  z-index: 0;
-} */
-
-/* Neon animated border */
-/* .neon-new-badge::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: repeating-conic-gradient(
-    from var(--a),
-    #ff4545 0%,
-    #ff4545 10%,
-    #ff0095 20%,
-    #006aff 30%,
-    #00ff99 40%,
-    #ff4545 50%
-  );
-  filter: blur(4px);
-  opacity: 0.75;
-  z-index: -1;
-  animation: spinGlow 4s linear infinite;
-} */
-
-/* Inner mask to keep glow outside */
-/* .neon-new-badge::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: #679bbd;
-  border-radius: 3px;
-  z-index: -1;
-}
-
-@keyframes spinGlow {
-  to {
-    --a: 1turn;
-  }
-} */
-
 
 .corner-badge {
   position: relative;
@@ -271,4 +215,21 @@
 @keyframes lineRight {
   0% { width: 0%; }
   100% { width: 100%; }
+}
+
+
+@utility job-desc-normal {
+  color: var(--color-gray-700);
+  font-weight: 400;
+  line-height: 1.625;
+}
+@utility job-desc-table-normal {
+  color: var(--color-gray-700);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+@utility job-desc-highlight {
+  color: var(--color-black);
+  font-weight: 700;
 }
