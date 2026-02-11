@@ -3,6 +3,8 @@ import { jobData } from "@/lib/jobData";
 import { PackagePlus } from "lucide-react";
 import { notFound } from "next/navigation";
 
+
+
 export default async function JobDetailPage({
   params,
 }: {
@@ -17,7 +19,7 @@ export default async function JobDetailPage({
   if (!job) {
     notFound();
   }
-
+  
   return (
     <div className="max-w-7xl mx-auto p-4 border bg-white mt-8 shadow-lg">
       <h1 className="items-center justify-center text-left">
@@ -26,7 +28,8 @@ export default async function JobDetailPage({
         </span>
         &nbsp;
         <span className="text-xl md:text-2xl font-bold text-blue-800 whitespace-nowrap">
-          [{job.vacancyDetails[0]?.total} Post]
+          
+          {job.totalPost} Post
         </span>
         &nbsp;
         <span className="text-xl md:text-2xl font-bold text-blue-800 whitespace-nowrap uppercase">
@@ -78,9 +81,13 @@ export default async function JobDetailPage({
 
       <table className="w-full border-collapse border border-slate-300">
         <tbody>
-          <tr className="text-green-600 font-bold text-center">
-            <td className="p-2 border border-slate-300">Important Dates</td>
-            <td className="p-2 border border-slate-300">Application Fee</td>
+          <tr className="text-green-600 font-bold text-center bg-slate-50">
+            <td className="p-2 border border-slate-300 w-[60%]">
+              Important Dates
+            </td>
+            <td className="p-2 border border-slate-300 w-[40%]">
+              Application Fee
+            </td>
           </tr>
           <tr>
             <td className="pl-8 pr-4 py-2 border border-slate-300 align-top text-left">
@@ -88,7 +95,6 @@ export default async function JobDetailPage({
                 <p key={i}>
                   <span className="text-xl">•</span>{" "}
                   <span className="job-desc-normal">{d.label}:</span>{" "}
-                  {/* <span className="job-desc-highlight">{d.value}</span> */}
                   <span
                     className={`
         ${d.label.includes("Last Date for Apply") ? "text-red-600 font-bold" : "job-desc-highlight"}
@@ -125,10 +131,99 @@ export default async function JobDetailPage({
               </p>
             </td>
           </tr>
+
+          <tr className="text-green-600 font-bold text-center bg-slate-50">
+            <td className="p-2 border border-slate-300 w-[60%]">
+              Age Limit AS ON {job.ageLimitDate}
+            </td>
+            <td className="p-2 border border-slate-300 w-[40%] text-red-600">
+              Total Posts
+            </td>
+          </tr>
+
+          {/* Data Row for Age and Total Post */}
+          <tr>
+            <td className="pl-8 pr-4 py-4 border border-slate-300 align-top text-left">
+              {job.ageDetails?.map((age, i) => (
+                <p key={i} className="py-1">
+                  <span className="text-xl">•</span>
+                  {""}
+                  <span className="job-desc-normal">{age.label}:</span>
+                  {""}
+                  <span className="job-desc-highlight">{age.value}</span>
+                </p>
+              ))}
+              <p className="py-1">
+                <span className="text-xl">•</span>{" "}
+                <span className="job-desc-normal">{job.ageRelaxationText}</span>
+              </p>
+            </td>
+
+            <div className="flex flex-col items-center justify-center pt-10">
+              <div className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
+                {job.totalPost}{" "}
+                <span className="text-xl font-bold text-slate-600 self-center">
+                  Posts
+                </span>
+              </div>
+              <div className="sharp-line"></div>
+            </div>
+          </tr>
         </tbody>
       </table>
 
-      {/* More tables for Vacancy and Links... */}
+      <div className="mt-8 overflow-x-auto">
+        {/* Header: Vacancy Details Only */}
+        <div className="bg-slate-50 text-green-700 text-center font-bold py-2 border border-slate-300 uppercase">
+          {job.boardName} Recruitment {job.currentYear} : Vacancy Details
+        </div>
+
+        <table className="w-full border-collapse border border-slate-300 table-fixed">
+          <tr className="font-bold text-center bg-slate-100 text-[15px]">
+            <td className="p-2 border border-slate-300 w-[30%]">Post Name</td>
+            <td className="p-2 border border-slate-300 w-[15%]">No. Of Post</td>
+            <td className="p-2 border border-slate-300 w-[55%]">
+              Eligibility Criteria
+            </td>
+          </tr>
+          <tbody>
+            {job.vacancyDetails.map((group, i) => (
+              <tr key={i}>
+                {/* LEFT SECTION: Individual Post Names and Counts */}
+                <td colSpan={2} className="p-0 border border-slate-300 align-top">
+            {group.posts.map((post, postIdx) => (
+              <div 
+                key={postIdx} 
+                className={`flex text-center items-stretch ${
+                  postIdx !== group.posts.length - 1 ? "border-b border-slate-300" : ""
+                }`}
+              >
+                {/* Individual Post Name */}
+                <div className="w-[66.6%] p-3 border-r border-slate-300 font-medium text-slate-800">
+                  {post.name}
+                </div>
+                {/* Individual Count */}
+                <div className="w-[33.4%] p-3 flex items-center justify-center font-bold">
+                  {post.count}
+                </div>
+              </div>
+            ))}
+          </td>
+
+                {/* RIGHT SECTION: Merged Eligibility for the entire group */}
+          <td className="p-4 border border-slate-300 align-middle text-left bg-white">
+            <div className="flex gap-2">
+              <span className="text-xl font-bold leading-none">•</span>
+              <p className="job-desc-normal text-[14px]">
+                {group.eligibility}
+              </p>
+            </div>
+          </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

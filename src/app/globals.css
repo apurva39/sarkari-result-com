@@ -233,3 +233,11 @@
   color: var(--color-black);
   font-weight: 700;
 }
+
+
+@utility sharp-line {
+  height: 1.5px;
+  width: 50%;
+  margin: 4px auto 0;
+  background: linear-gradient(to right, transparent, #333, transparent);
+}
