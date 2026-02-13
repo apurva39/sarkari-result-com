@@ -2,7 +2,7 @@
 import { jobData } from "@/lib/jobData";
 import { PackagePlus } from "lucide-react";
 import { notFound } from "next/navigation";
-
+import ImportantLinks from "@/components/ImportantLinks";
 
 
 export default async function JobDetailPage({
@@ -67,7 +67,7 @@ export default async function JobDetailPage({
         <span className="job-desc-highlight">{job.title}</span> Recruitment{" "}
         {job.currentYear} for{" "}
         <span className="job-desc-highlight">
-          {job.vacancyDetails[0]?.total} Posts
+          {job.totalPost} Posts
         </span>
         . Online Registration has started from{" "}
         <span className=" job-desc-highlight">
@@ -224,6 +224,36 @@ export default async function JobDetailPage({
           </tbody>
         </table>
       </div>
+      {/* mode of selection*/}
+      <div className="mt-8 overflow-x-auto">
+        <div className="bg-slate-50 text-green-700 text-center font-bold py-2 border border-slate-300 uppercase">
+          {job.title}: Mode of Selection
+        </div>
+        <table className="w-full border-collapse border border-slate-300 table-fixed">
+          <tbody>
+            <tr>
+              <td className="p-6 pl-20 bg-white text-center">
+                
+               {job.selectionProcess?.map((step,index)=>(
+                <li key={index} className="flex items-start gap-2 text-[17px] font-bold text-slate-900">
+                  <span className="text-xl leading-none">❖</span>
+                  {/* <span className="text-xl leading-none">•</span> */}
+                  <span>{step}</span>
+
+                </li>
+               ))}
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+      {/* Important Links Section */}
+      <ImportantLinks links={job.links} />
     </div>
   );
 }

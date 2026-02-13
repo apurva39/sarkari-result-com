@@ -1,5 +1,11 @@
 // src/lib/jobData.ts
 
+export interface JobLink{
+  label:string;
+  url:string;
+  url2?:string;
+  url3?:string;
+}
 
 export interface VacancyPost{
   name:string;
@@ -10,6 +16,7 @@ export interface VacancyGroup{
   posts: VacancyPost[];
   eligibility:string;
 }
+
 export interface JobDetail {
   slug: string;
   title: string;
@@ -26,7 +33,9 @@ export interface JobDetail {
   // vacancyDetails: { postName: string[]; total: string; eligibility: string }[];
   vacancyDetails: VacancyGroup[];
   totalPost:number;
-  links: { label: string; url: string }[];
+  selectionProcess?: string[];
+  links: JobLink[];
+
 
   
 }
@@ -86,6 +95,12 @@ export const jobData: JobDetail[] = [
         ],
         eligibility: "Bachelor Degree with Mathematics/Statistics as a subject."
       }
+    ],
+    selectionProcess: [
+      "Tier-I: Computer Based Examination",
+      "Tier-II: Computer Based Examination",
+      "Data Entry Speed Test (DEST)",
+      "Document Verification (DV)"
     ],
     links: [
       { label: "Apply Online", url: "https://ssc.gov.in" },
@@ -152,9 +167,21 @@ export const jobData: JobDetail[] = [
         eligibility: "Bachelor Degree with Mathematics/Statistics as a subject."
       }
     ],
+    selectionProcess: [
+      "Written Exam",
+      "Physical Efficiency Test (PET)",
+      "Physical Standards Test (PST)",
+      "Document Verification",
+      "Medical Examination"
+    ],
     links: [
       { label: "Apply Online", url: "#" },
       { label: "Download Notification", url: "#" },
+      { label: "Download Syllabus", url: "#" },
+      { label: "Download Admit Card", url: "#" },
+      { label: "Download Result", url: "#" },
+      { label: "Download Answer Key", url: "#" },
+      { label: "Download Previous Year Papers", url: "#" },
     ],
   },
 ];
